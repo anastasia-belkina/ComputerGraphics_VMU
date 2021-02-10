@@ -1,0 +1,149 @@
+// Meshes and other visible objects
+function createMeshes(){
+
+        createCtrlBox();
+        // делаем брусчатку
+        createPlane(170, 148, 0, 0, 0, -0.5, 0, 'img/snow13.jpg', 10, false);
+
+        // основная башня
+        createRectangle(30, 66, 30, 0, 33, 0, 'img/bricks.jpg', false);
+        // положим на нее снег
+        createPlane(30, 30, 0, 66.2, 0, -0.5, 0, 'img/snow13.jpg', 10, false);
+
+        // боковые пристройки
+        createRectangle(70, 26, 4, -50, 13, 0, 'img/bricks.jpg', false);
+        createRectangle(70, 26, 4, 50, 13, 0, 'img/bricks.jpg', false);
+        // положим на них снег
+        createPlane(70, 4, -50, 26.2, 0, -0.5, 0, 'img/snow13.jpg', 10, false);
+        createPlane(70, 4, 50, 26.2, 0, -0.5, 0, 'img/snow13.jpg', 10, false);
+
+        // передняя пристройка
+        createRectangle(18, 26, 16, 0, 13, 23, 'img/bricks.jpg', false);
+        // положим на нее снег
+        createPlane(18, 16, 0, 26.2, 23, -0.5, 0, 'img/snow13.jpg', 10, false);
+
+        // пристройка сверху
+        createRectangle(20, 16, 20, 0, 74, 0, 'img/bricks.jpg', false);
+        // положим на нее снег
+        createPlane(20, 20, 0, 82.2, 0, -0.5, 0, 'img/snow13.jpg', 10, false);
+
+        // еще сверху
+        createRectangle(10, 28, 10, 0, 84, 0, 'img/bricks.jpg', false);
+        // положим на нее снег
+        createPlane(10, 10, 0, 98.2, 0, -0.5, 0, 'img/snow13.jpg', 10, false);
+        
+        // пристраиваем конус
+        createCone(4.5, 18, 12, 0, 106, 0, 0x00693A);
+        // делаем звезду-шар
+        createSphere(2, 3, 2, 0, 116, 0, 0xE40000);
+        // делаем часики
+        createPlane(10, 10, 0, 74, 10.1, 0, 0, 'img/Clock_cut.PNG', 1, false);
+        createPlane(10, 10, 0, 74, -10.1, 1, 0, 'img/Clock_cut.PNG', 1, false);
+        createPlane(10, 10, 10.1, 74, 0, 0, 0.5, 'img/Clock_cut.PNG', 1, false);
+        createPlane(10, 10, -10.1, 74, 0, 0, -0.5, 'img/Clock_cut.PNG', 1, false);
+        // делаем дверь
+        createPlane(10, 20, 0, 14, 31.1, 0, 0, 'img/doors.PNG', 1, false);
+        // делаем заборчики
+           // правый
+        for (let i = 18; i < 85; i+=5) {
+                createRectangle(3, 4, 2, i, 28, 1, 'img/bricks.jpg', false);
+        }
+           // левый
+        for (let i = -18; i > -85; i-=5) {
+                createRectangle(3, 4, 2, i, 28, 1, 'img/bricks.jpg', false);
+        }
+           // передний спереди
+        for (let i = -7.5; i < 11; i+=5) {
+                createRectangle(3, 4, 2, i, 28, 30, 'img/bricks.jpg', false);
+        }
+           // боковые спереди
+        for (let i = 26; i > 15; i-=5) {
+                createRectangle(2, 4, 3, -8, 28, i, 'img/bricks.jpg', false);
+        }
+
+        for (let i = 26; i > 15; i-=5) {
+                createRectangle(2, 4, 3, 8, 28, i, 'img/bricks.jpg', false);
+        }
+
+           // а теперь верхние 4 заборчика
+        for (let i = -9.5; i < 10; i+=2) {
+                createRectangle(1, 2, 1, i, 83, 9.5, 'img/wbricks.jpg', false);
+        }
+
+        for (let i = -9.5; i < 10; i+=2) {
+                createRectangle(1, 2, 1, i, 83, -9.5, 'img/wbricks.jpg', false);
+        }
+
+        for (let i = -9.5; i < 10; i+=2.5) {
+                createRectangle(1, 2, 1, -9.5, 83, i, 'img/wbricks.jpg', false);
+        }
+
+        for (let i = -9.5; i < 10; i+=2) {
+                createRectangle(1, 2, 1, 9.5, 83, i, 'img/wbricks.jpg', false);
+        }
+        // добавим конусов
+        createCone(2, 10, 4, -13, 71, 13, 0xF6F3F3);
+        createCone(2, 10, 4, 13, 71, 13, 0xF6F3F3);
+        createCone(2, 10, 4, 13, 71, -13, 0xF6F3F3);
+        createCone(2, 10, 4, -13, 71, -13, 0xF6F3F3);
+        // добавим слова
+        //createWords();
+        // добавим дорогу
+        createRectangle(18, 4, 42, 0, 2, 52, 'img/road.jpg', true);
+        // делаем облачка со снегом
+        createCloud(-20, 100, 10, "img/cloud.png");
+        createCloud(30, 90, 15, "img/cloud.png");
+        createCloud(-30, 80, 15, "img/cloud.png");
+}
+
+
+
+// Creating plane
+function createPlane(plX, plY, corX, corY, corZ, angleX, angleY, texture, set, bumping){        
+        const planeGeometry = new THREE.PlaneGeometry(plX, plY);
+        // const planeMaterial = new THREE.MeshLambertMaterial({
+        //         map: loader.load(texture),
+        // });
+
+        const planeMaterial = new THREE.TextureLoader().load( texture);	// load texture
+        
+	// Set min max texture filters
+	 planeMaterial.magFilter = THREE.NearestFilter;
+	//planeMaterial.magFilter = THREE.LinearFilter;		// default mag filter
+	//planeMaterial.minFilter = THREE.NearestFilter;
+	// planeMaterial.minFilter = THREE.NearestMipMapNearestFilter;
+	planeMaterial.minFilter = THREE.NearestMipMapLinearFilter;
+	// planeMaterial.minFilter = THREE.LinearFilter;
+	// planeMaterial.minFilter = THREE.LinearMipMapNearestFilter;
+	//planeMaterial.minFilter = THREE.LinearMipMapLinearFilter;		// default min filter
+	
+	// set repeating params
+	planeMaterial.wrapS = THREE.RepeatWrapping;
+	planeMaterial.wrapT = THREE.RepeatWrapping;
+	planeMaterial.repeat.set(set, set);
+	// planeMaterial.repeat.set(0.5, 0.5); // zoom
+        // planeMaterial.repeat.set(-2, -2); // repeat reversed
+
+        const texture2 =  new THREE.MeshStandardMaterial({ map: planeMaterial });	// map texture to mesh
+        plane = new THREE.Mesh(planeGeometry, texture2);
+        
+        if (bumping) {
+        // Load bump map
+	        const bump = new THREE.TextureLoader().load( "img/road_bump.jpg" ); // load bump map
+	// You can repeat bump. Usually both bump and texture should have the same repeating params set.
+	        bump.wrapS = THREE.RepeatWrapping;
+	        bump.wrapT = THREE.RepeatWrapping;
+                bump.repeat.set(set, set);
+                texture2.bumpMap = bump;
+                texture2.bumpScale = 0.8;
+        }
+        
+
+        plane.rotation.x = angleX*Math.PI; //угол наклона плоскости меняется
+        plane.rotation.y = angleY*Math.PI;
+        plane.position.x = corX;
+        plane.position.y = corY;
+        plane.position.z = corZ;
+        plane.receiveShadow = true;
+        scene.add(plane);
+}
